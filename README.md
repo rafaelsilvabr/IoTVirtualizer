@@ -1,7 +1,7 @@
 # IoTVirtualizer
 
 <br>
-<img src="/../Virtualizer.png" width="350">
+<img src="Virtualizer.png" width="350">
 <br>
 
 • Receiver: Implementa a camada responsavel por receber os dados e traduzir as
@@ -27,7 +27,7 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 • Sender: Envia os dados processados a plataforma.
 
-Template Data:
+Template Data: 
 
 ## exemplo dado p/registro recursos virtuais ou capabilities
 
