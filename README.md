@@ -33,27 +33,33 @@ Template Data:
 
 O registro de um recurso ou capability no Virtualizer precisa seguir um padrão e informar os segunites dados acerca do recurso Virtual:
 
-.. code-block:: python
-	'state' = 'Virtual' or 'Capability'
+
+```python
+	'state' = 'Virtual' or 'Capability' 
+```
 
 > Virtual: Informa que se refere à um dado de registro de um recurso virtual ao Virtualizer
 > Capability: Informa que se refere à um dado de registro de uma capability nova ao Virtualizer
 
-.. code-block:: python
+
+```python
 	'regInfos' : {'data': (dados de registro INCT)}
+```
 
 > regInfos: 
 >Para Virtual Resources: Segue os padrões de dados de registro da plataforma InterSCity, contem os dados necessários para cadastro de um recurso na platafomra.
 > Para Capabilities (TRABALHO FUTURO): Segue os [padrões internos de definição de novas capabilities](defCapability.md).
 
-.. code-block:: python
+
+```python
 	'realSensors' : {(Parametros dos sensores REAIS vinculados ao recurso virtual)} 
+```
 
 > realSensors: Parâmetros que definem os sensores REAIS que serão utilizados pelo recurso virtual para a composição do dado processado. Pode conter uma refência direta dos sensores (uuid do sensor) ou dados referentes aos recursos existentes na plataforma INCT os quais permitam a localização do sensor através do Resource Dscoverer, microsserviço da INCT.
 
 Exemplo:
 
-.. code-block:: python
+```python
 	# Registro de um novo recurso Virtual
 	msg = {'state':'Virtual',
 		'regInfos':{
@@ -73,8 +79,8 @@ Exemplo:
 			'ids': ['uuid1','uuid2']
 		}
 	}
-
-.. code-block:: python
+```
+```python
 	# Registro de uma nova Capability
 	msg = {'state':'Capability',
 		'regInfos':{
@@ -84,10 +90,11 @@ Exemplo:
 			}
 		}
 	}
+```
 
 PS.:
-## exemplo dado sensor real
-.. code-block:: python
+## Dado Recebido pelo Virtualizer
+```python
 	msg = {
 		'uuid': 'xxxx-xxxx-xxxx',
 		'data':{
@@ -96,5 +103,5 @@ PS.:
 			}
 		}
 	}
-
+```
 .
