@@ -31,16 +31,16 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 ## Definições Virtual Resource e Capability
 
 Virtual Resource
-	• uuid: id de referência para o recurso na INCT;
+>	• uuid: id de referência para o recurso na INCT;
 
-	• capabilities: Lista de capabilities do recurso. Lembrando que, para que um registro realize uma capability, essa capability deve ser incluida no Virtualizer anteriormente;
+>	• capabilities: Lista de capabilities do recurso. Lembrando que, para que um registro realize uma capability, essa capability deve ser incluida no Virtualizer anteriormente;
 
-	• realSensors: Valores de referencia a sensores reais,previamente cadastrados na INCT, que possibilitam a descoberta desses sensores através do Resource Discoverer (Microsserviço da plataforma INCT).
+>	• realSensors: Valores de referencia a sensores reais,previamente cadastrados na INCT, que possibilitam a descoberta desses sensores através do Resource Discoverer (Microsserviço da plataforma INCT).
 
 Capability
-	• name: Nome de referência da capability;
+>	• name: Nome de referência da capability;
 
-	• def: Definição da operação realizada pela capability. [Mais Informações](defCapability.md).
+>	• def: Definição da operação realizada pela capability. [Mais Informações](defCapability.md).
 
 
 
