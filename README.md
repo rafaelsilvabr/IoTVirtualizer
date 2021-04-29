@@ -110,13 +110,8 @@ Exemplo:
 
 ### Dado Recebido pelo Virtualizer
 ```python
-	msg = {
-		'uuid': 'xxxx-xxxx-xxxx',
-		'data':{
-			"data": {
-				"temperature": 30
-			}
-		}
+	"data": {
+		"temperature": 30
 	}
 ```
 .
