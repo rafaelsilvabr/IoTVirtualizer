@@ -3,7 +3,8 @@
 <br>
 <img src="Virtualizer.png" width="350">
 <br>
-
+<img src="virtualizer_classes.png" width="350">
+<br>
 • Receiver: Implementa a camada responsavel por receber os dados e traduzir as
 requisicoes para os metodos internos, pode assumir uma interface REST ou Pub-
 Sub;
@@ -31,11 +32,14 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 Virtual Resource:
 	- uuid: id de referência para o recurso na INCT;
+
 	- capabilities: Lista de capabilities do recurso. Lembrando que, para que um registro realize uma capability, essa capability deve ser incluida no Virtualizer anteriormente;
+
 	- realSensors: Valores de referencia a sensores reais,previamente cadastrados na INCT, que possibilitam a descoberta desses sensores através do Resource Discoverer (Microsserviço da plataforma INCT).
 
 Capability:
-	- name: Nome de referência da capability
+	- name: Nome de referência da capability;
+
 	- def: Definição da operação realizada pela capability. [Mais Informações](defCapability.md).
 
 
@@ -98,8 +102,8 @@ Exemplo:
 	msg = {'state':'Capability',
 		'regInfos':{
 		"description": {
-			"maxTemperature":"default",
-			"minTemperature":"default"
+			"maxTemperature":"maxData",
+			"minTemperature":"minData"
 		}
 	}
 ```
