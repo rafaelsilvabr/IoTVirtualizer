@@ -3,7 +3,7 @@
 <br>
 <img src="Virtualizer.png" width="350">
 <br>
-<img src="virtualizer_classes.png" width="350">
+<img src="virtualizer_classes.jpg" width="350">
 <br>
 • Receiver: Implementa a camada responsavel por receber os dados e traduzir as
 requisicoes para os metodos internos, pode assumir uma interface REST ou Pub-
