@@ -31,10 +31,10 @@ def manager():
             if(data["state"]=="Virtual"):
                 print("DADO VIRTUAL")
                 #registrar novo recurso virtual
-                manager.manageRegistResource(data)
+                response = manager.manageRegistResource(data)
         except:
-            pass
-        return "test"
+            response = jsonify({"Data":"Erro no Registro"})
+        return response
 
 if __name__ == "__main__":
     manager = Manager()

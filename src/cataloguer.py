@@ -6,9 +6,9 @@ class Cataloguer(object):
         pass
 
     #realiza cadastro/ponto de acesso dos dados na db
-    def registResource(self,data):
+    def registResource(self,data,uuid):
         try:
-            print("Registrando o recurso")
+            print("Registrando o recurso na database")
             res=VirtualRes(
                 uuid = datetime.now(),
                 description = data['regInfos']['data']['description'],

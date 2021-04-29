@@ -16,7 +16,7 @@ do Virtualizer;
 operacooes/capabilities que o Virtualizer realiza. Realiza o armazenamento e prove
 esses dados aos outros componentes quando requisitado;
 
-• Register: Registra o recurso virtual na plataforma e retorna o uuid de cadastro.
+• Register: Registra o recurso virtual na plataforma e retorna o uuid de cadastro e caso necessário, (TRABALHO FUTURO) realiza o registro do virtualizer no cadastro dos sensores referenciados pelo recurso virtual em IoTGateways.
 
 • DataProcessor: Responsavel pelo processamento dos dados do recurso virtual. A
 cada novo processamento de dados uma instancia nova do componente e criada,
@@ -27,9 +27,22 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 • Sender: Envia os dados processados a plataforma.
 
-Template Data: 
+## Definições Virtual Resource e Capability
 
-## exemplo dado p/registro recursos virtuais ou capabilities
+Virtual Resource:
+	- uuid: id de referência para o recurso na INCT;
+	- capabilities: Lista de capabilities do recurso. Lembrando que, para que um registro realize uma capability, essa capability deve ser incluida no Virtualizer anteriormente;
+	- realSensors: Valores de referencia a sensores reais,previamente cadastrados na INCT, que possibilitam a descoberta desses sensores através do Resource Discoverer (Microsserviço da plataforma INCT).
+
+Capability:
+	- name: Nome de referência da capability
+	- def: Definição da operação realizada pela capability. [Mais Informações](defCapability.md).
+
+
+
+## Data Template: 
+
+### Exemplo dado p/registro recursos virtuais ou capabilities
 
 O registro de um recurso ou capability no Virtualizer precisa seguir um padrão e informar os segunites dados acerca do recurso Virtual:
 
@@ -84,16 +97,14 @@ Exemplo:
 	# Registro de uma nova Capability
 	msg = {'state':'Capability',
 		'regInfos':{
-		"description": "maxTemperature",
-			"def": {
-				#a definir
-			}
+		"description": {
+			"maxTemperature":"default",
+			"minTemperature":"default"
 		}
 	}
 ```
 
-PS.:
-## Dado Recebido pelo Virtualizer
+### Dado Recebido pelo Virtualizer
 ```python
 	msg = {
 		'uuid': 'xxxx-xxxx-xxxx',

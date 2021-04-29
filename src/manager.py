@@ -1,10 +1,12 @@
 from sender import Sender
 from cataloguer import Cataloguer
+from register import Register
 
 class Manager (object):
     def __init__(self):
         print("MANAGER INICIADO")
         self.sender = Sender()
+        self.register = Register()
         self.cataloguer = Cataloguer()
 
     def manageSendData(self,data):
@@ -13,4 +15,7 @@ class Manager (object):
 
     def manageRegistResource(self,data):
         print("ENTROU NO MANAGER")
-        return self.cataloguer.registResource(data)
+        uuid = self.register.regData(data)
+        if(uuid != -1):
+            confirmation = self.cataloguer.registResource(data, uuid)
+        return confirmation

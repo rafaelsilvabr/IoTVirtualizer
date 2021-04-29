@@ -6,7 +6,6 @@ headers= {
 }
 
 msg = {'state':'Virtual',
-	'registred':False,
 	'regInfos':{
 	    "data": {
 	      "description": "A simple virtual sensor",
