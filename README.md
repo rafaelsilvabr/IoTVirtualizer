@@ -78,29 +78,31 @@ Exemplo:
 
 ```json
 	# Registro de um novo recurso Virtual
-	msg = {"regInfos":{
-			"data": {
-			"description": "A simple virtual sensor",
-			"capabilities": {
-				"maxTemperature":["max","temperature"],
-				"minTemperature":["mix","temperature"],
-				"averageTemperature":["average","temperature"]
-			},
-			"status": "active",
-			"lat":10,
-			"lon":12
-			}
+	{
+	"regInfos":{
+		"data": {
+		"description": "A simple virtual sensor",
+		"capabilities": {
+			"maxTemperature":["max","temperature"],
+			"minTemperature":["mix","temperature"],
+			"averageTemperature":["average","temperature"]
 		},
-		"realSensors":{
-			"0": {"uuid":"xxx-xxxx-xxxx-xxxx"}, # A unic sensor
-			"1": {"lat":31.3123,"lon":35.21323,"range":50}, # Sensors in a given location
-			"2": {"lat":31.3123,"lon":35.21323,"range":50,"capabilitie":"temperature"} # Sensors in a given location with a certain capability
+		"status": "active",
+		"lat":10,
+		"lon":12
 		}
+	},
+	"realSensors":{
+		"0": {"uuid":"xxx-xxxx-xxxx-xxxx"}, # A unic sensor
+		"1": {"lat":31.3123,"lon":35.21323,"range":50}, # Sensors in a given location
+		"2": {"lat":31.3123,"lon":35.21323,"range":50,"capabilitie":"temperature"} # Sensors in a given location with a certain capability
 	}
 ```
+
 ```json
 	# Registro de uma nova Capability
-	{"state":"Capability",
+	{
+	"state":"Capability",
 		"regInfos":{
 		"description": {
 			"maxTemperature":"maxData",
@@ -112,7 +114,9 @@ Exemplo:
 ### Dado Recebido pelo Virtualizer
 ```json
 	{
-		"temperature": 30
+		"temperature": 30,
+		"pressure": 1,
+		"light": 213
 	}
 ```
 .
