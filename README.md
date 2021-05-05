@@ -50,17 +50,17 @@ Capability
 
 O registro de um recurso ou capability no Virtualizer precisa seguir um padrão e informar os segunites dados acerca do recurso Virtual:
 
-
-```python
-	'state' = 'Virtual' or 'Capability' 
+---------------obs.: Deve ser revisto (removido)
+```json
+	"state' = 'Virtual' or 'Capability' 
 ```
 
 > Virtual: Informa que se refere à um dado de registro de um recurso virtual ao Virtualizer
 > Capability: Informa que se refere à um dado de registro de uma capability nova ao Virtualizer
+---------------
 
-
-```python
-	'regInfos' : {'data': (dados de registro INCT)}
+```json
+	"regInfos" : {"data": (dados de registro INCT)}
 ```
 
 > regInfos: 
@@ -68,39 +68,40 @@ O registro de um recurso ou capability no Virtualizer precisa seguir um padrão 
 > Para Capabilities (TRABALHO FUTURO): Segue os [padrões internos de definição de novas capabilities](defCapability.md).
 
 
-```python
-	'realSensors' : {(Parametros dos sensores REAIS vinculados ao recurso virtual)} 
+```json
+	"realSensors" : {(Parametros dos sensores REAIS vinculados ao recurso virtual)} 
 ```
 
 > realSensors: Parâmetros que definem os sensores REAIS que serão utilizados pelo recurso virtual para a composição do dado processado. Pode conter uma refência direta dos sensores (uuid do sensor) ou dados referentes aos recursos existentes na plataforma INCT os quais permitam a localização do sensor através do Resource Dscoverer, microsserviço da INCT.
 
 Exemplo:
 
-```python
+```json
 	# Registro de um novo recurso Virtual
-	msg = {'state':'Virtual',
-		'regInfos':{
-			'data': {
+	msg = {"regInfos":{
+			"data": {
 			"description": "A simple virtual sensor",
-			"capabilities": [
-				"maxTemperature",
-				"minTemperature",
-				"averageTemperature"
-			],
+			"capabilities": {
+				"maxTemperature":["max","temperature"],
+				"minTemperature":["mix","temperature"],
+				"averageTemperature":["average","temperature"]
+			},
 			"status": "active",
 			"lat":10,
 			"lon":12
 			}
 		},
-		'realSensors':{
-			'ids': ['uuid1','uuid2']
+		"realSensors":{
+			"0": {"uuid":"xxx-xxxx-xxxx-xxxx"}, # A unic sensor
+			"1": {"lat":31.3123,"lon":35.21323,"range":50}, # Sensors in a given location
+			"2": {"lat":31.3123,"lon":35.21323,"range":50,"capabilitie":"temperature"} # Sensors in a given location with a certain capability
 		}
 	}
 ```
-```python
+```json
 	# Registro de uma nova Capability
-	msg = {'state':'Capability',
-		'regInfos':{
+	{"state":"Capability",
+		"regInfos":{
 		"description": {
 			"maxTemperature":"maxData",
 			"minTemperature":"minData"
@@ -109,8 +110,8 @@ Exemplo:
 ```
 
 ### Dado Recebido pelo Virtualizer
-```python
-	"data": {
+```json
+	{
 		"temperature": 30
 	}
 ```
