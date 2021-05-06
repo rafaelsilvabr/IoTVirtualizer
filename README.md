@@ -1,7 +1,7 @@
 # IoTVirtualizer
 
 <br>
-<img src="virtualizer.png" width="350">
+<img src="Virtualizer.png" width="350">
 <br>
 <img src="virtualizer_classes.jpg" width="350">
 <br>
@@ -28,25 +28,9 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 • Sender: Envia os dados processados a plataforma.
 
-## Definições Virtual Resource e Capability
-
-Virtual Resource
->	• uuid: id de referência para o recurso na INCT;
-
->	• capabilities: Lista de capabilities do recurso. Lembrando que, para que um registro realize uma capability, essa capability deve ser incluida no Virtualizer anteriormente;
-
->	• realSensors: Valores de referencia a sensores reais,previamente cadastrados na INCT, que possibilitam a descoberta desses sensores através do Resource Discoverer (Microsserviço da plataforma INCT).
-
-Capability
->	• name: Nome de referência da capability;
-
->	• def: Definição da operação realizada pela capability. [Mais Informações](defCapability.md).
-
-
-
 ## Data Template: 
 
-### Exemplo dado p/registro recursos virtuais ou capabilities
+### Exemplo dado p/registro de um Recurso Virtual
 
 O registro de um Recurso Virtual possui os seguintes dados:
 
@@ -62,7 +46,6 @@ Exemplo:
 	# Registro de um novo recurso Virtual
 	{
 	"regInfos":{
-		"data": {
 		"description": "A simple virtual sensor",
 		"capabilities": [
 			"maxTemperature",
@@ -72,7 +55,6 @@ Exemplo:
 		"status": "active",
 		"lat":10,
 		"lon":12
-		}
 	},
 	"realSensors":{
 		"0": {"uuid":"45b7d363-86fd-4f81-8681-663140b318d4","capabilities":["temperature"]}, # A unic sensor
@@ -80,8 +62,7 @@ Exemplo:
 		"2": {"lat":31.3123,"lon":35.21323,"radius":50} # It will use sensors in a certain location, but note that it will not filter only the sensors that have the capability that will be used by the resource
 	}}
 ```
-
-O registro de uma Capability possui os seguintes dados:
+### Exemplo dado p/registro de uma Capability
 
 Name: Nome da Capability
 
