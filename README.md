@@ -43,7 +43,7 @@ Exemplo:
 >PUT: /resources/{data}
 
 ```json
-	# Registro de um novo recurso Virtual
+# Registro de um novo recurso Virtual
 {
 "regInfos":{
 	"description": "A simple virtual sensor",
@@ -70,7 +70,7 @@ Description: Uma descrição da capability (Info necessária para o registro na 
 
 capability_type: default = sensor (Info padrão para registro na INCT)
 
-association: Definição da associação entre uma capability virtual e um tipo uma capability real de um sensor (TRABALHO FUTURO): Segue os [padrões internos de definição de novas capabilities](defCapability.md).
+association: Definição da associação entre uma capability virtual e uma capability real. Segue os [padrões internos de definição de novas capabilities (TRABALHO FUTURO)](defCapability.md).
 
 Exemplo:
 
