@@ -28,6 +28,24 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 • Sender: Envia os dados processados a plataforma.
 
+## Fluxo de Mensagem
+
+# Mensagem de um sensor
+>Msg recebida (receiver);
+>Manager identifica a qual resource o dado pertence(manager,cataloguer);
+>Inicializa processamento das capabilities do recurso(manager,dataProcessor);
+>Dado Processado(dataProcessor);
+>Ao fim do processamento o dado é enviado(sender).
+
+# Mensagem de cadastro de um novo recurso virtual e de uma nova capability
+
+>Msg recebida(receiver);
+>Manager realiza cadastro no catalog (manager,cataloguer);
+>Registro na INCT(cataloguer,register);
+>Com as infos de registro, register realiza o cadastro no Gateway para receber os dados diretamente (register);
+>Armazenamento das informações de registro localmente(cataloguer).
+
+
 ## Data Template: 
 
 ### Exemplo dado p/registro de um Recurso Virtual
@@ -40,7 +58,7 @@ realSensors: Parâmetros que possibilitam encontrar os sensores REAIS através d
 
 Exemplo:
 
->PUT: /resources/{data}
+>PUT: /resources
 
 ```json
 # Registro de um novo recurso Virtual
@@ -68,13 +86,13 @@ Name: Nome da Capability
 
 Description: Uma descrição da capability (Info necessária para o registro na INCT)
 
-capability_type: default = sensor (Info padrão para registro na INCT)
+capability_type: sensor (Info padrão para registro de um recurso do tipo sensor na INCT)
 
 association: Definição da associação entre uma capability virtual e uma capability real. Segue os [padrões internos de definição de novas capabilities (TRABALHO FUTURO)](defCapability.md).
 
 Exemplo:
 
->PUT: /capabilities/{data}
+>PUT: /capabilities
 
 ```json
 # Registro de uma nova Capability
@@ -104,8 +122,12 @@ Exemplo:
 ```
 
 ### Dado Recebido pelo Virtualizer
+
+>PUT: /data (atual)
+>PUT: /resources/{virtualResource}/data (TRABALLHO FUTURO)
 ```json
 {
+	"uuid":"45b7d363-86fd-4f81-8681-663140b318d4",
 	"temperature": 30,
 	"pressure": 1,
 	"light": 213
