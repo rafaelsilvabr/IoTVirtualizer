@@ -32,17 +32,25 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 ### Mensagem de um sensor
 >Msg recebida (receiver);
+
 >Manager identifica a qual resource o dado pertence(manager,cataloguer);
+
 >Inicializa processamento das capabilities do recurso(manager,dataProcessor);
+
 >Dado Processado(dataProcessor);
+
 >Ao fim do processamento o dado é enviado(sender).
 
 ### Mensagem de cadastro (novo recurso virtual / nova capability)
 
 >Msg recebida(receiver);
+
 >Manager realiza cadastro no catalog (manager,cataloguer);
+
 >Registro na INCT(cataloguer,register);
+
 >Com as infos de registro, register realiza o cadastro no Gateway para receber os dados diretamente (register);
+
 >Armazenamento das informações de registro localmente(cataloguer).
 
 
