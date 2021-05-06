@@ -30,14 +30,14 @@ visto que gerariamos uma requisicao por Capabilitie a plataforma);
 
 ## Fluxo de Mensagem
 
-# Mensagem de um sensor
+### Mensagem de um sensor
 >Msg recebida (receiver);
 >Manager identifica a qual resource o dado pertence(manager,cataloguer);
 >Inicializa processamento das capabilities do recurso(manager,dataProcessor);
 >Dado Processado(dataProcessor);
 >Ao fim do processamento o dado é enviado(sender).
 
-# Mensagem de cadastro de um novo recurso virtual e de uma nova capability
+### Mensagem de cadastro (novo recurso virtual / nova capability)
 
 >Msg recebida(receiver);
 >Manager realiza cadastro no catalog (manager,cataloguer);
