@@ -1,3 +1,5 @@
+from datetime import datetime
+from flask.wrappers import Response
 import requests
 
 class Register(object):
@@ -5,13 +7,26 @@ class Register(object):
         self.headers = {'Content-type': 'application/json'}
         pass
     def regData(self,regInfos):
-        print("REGISTRANDO RECURSO VIRTUAL NA INCT")
-        msg = 0
+        print("[Register] REGISTRANDO RECURSO VIRTUAL NA INCT")
         try:
-            response = requests.post ('http://addressINCT:8000/adaptor/resources', data = json.dumps(regInfos), headers=self.headers)
-            msg = response.text
+            #response = requests.post ('http://addressINCT:8000/adaptor/resources', data = json.dumps(regInfos), headers=self.headers)
+            #response = response.text
+            response = {"data":
+                {
+                "uuid":datetime.now()
+                }
+            }
+            return response
         except:
             print("[REGISTER]Erro no Registro")
-            msg = -1
-
-        return msg
+            return -1
+    def regCap(self,regInfos):
+        print("[Register] REGISTRANDO CAPABILITY NA INCT")
+        try:
+            #response = requests.post("MANDA PRA INCT")
+            #response = response.txt
+            response = "Ok"
+            return response
+        except:
+            print("[REGISTER]Erro no Registro")
+            return -1
