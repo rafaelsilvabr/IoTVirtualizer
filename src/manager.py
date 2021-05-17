@@ -14,8 +14,27 @@ class Manager (object):
         return self.sender.sendData(data)
 
     def manageRegistResource(self,data):
-        print("ENTROU NO MANAGER")
-        uuid = self.register.regData(data)
-        if(uuid != -1):
-            confirmation = self.cataloguer.registResource(data, uuid)
-        return confirmation
+        capabilities = self.cataloguer.consultCapabilities()
+        capabilities = capabilities.__dict__
+        try:
+            #(TO DO)(Está errado, tratar urgentemente)
+            for capability in data["regInfos"]["capabilities"]: #verifica se todas as capabilities estão na db
+                temp = capabilities["__data__"][capability]        
+            uuid = self.register.regData(data)
+            if(uuid != -1):
+                resource = self.cataloguer.saveResource(data, uuid)
+                return resource
+        except:
+            return -1
+
+    def manageRegistCapability(self,data):
+        capability={
+            "name":data["name"],
+            "description":data["description"],
+            "capability_type":"sensor"
+        }
+        response = self.register.regCap(capability)
+        if(response != -1):
+            capability = self.cataloguer.saveCapability(data)
+            return capability
+        return -1

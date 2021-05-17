@@ -82,11 +82,11 @@ Exemplo:
 	"lat":10,
 	"lon":12
 },
-"realSensors":{
-	"0": {"uuid":"45b7d363-86fd-4f81-8681-663140b318d4","capabilities":["temperature"]}, # A unic sensor
-	"1": {"lat":31.3123,"lon":35.21323,"radius":50,"capabilities":["temperature","pressure"]}, # Will use sensors in a given location with a certain capability
-	"2": {"lat":31.3123,"lon":35.21323,"radius":50} # It will use sensors in a certain location, but note that it will not filter only the sensors that have the capability that will be used by the resource
-}}
+"realSensors":[
+	["uuid":"45b7d363-86fd-4f81-8681-663140b318d4","capabilities":["temperature"]],
+	["lat":31.3123,"lon":35.21323,"radius":50,"capabilities":["temperature","pressure"]],
+	["lat":31.3123,"lon":35.21323,"radius":50]]
+}
 ```
 ### Exemplo dado p/registro de uma Capability
 

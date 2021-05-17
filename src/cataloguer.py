@@ -6,15 +6,56 @@ class Cataloguer(object):
         pass
 
     #realiza cadastro/ponto de acesso dos dados na db
-    def registResource(self,data,uuid):
+    def consultResource(self):
         try:
-            print("Registrando o recurso na database")
+            print("[Cataloguer] Consultando Resources")
+            resources = VirtualRes.select()
+            return resources
+        except:
+            print("[Cataloguer] Erro no processo de consulta do Resource")
+            return -1
+
+    def saveResource(self,data,uuid):
+        try:
+            #"Registrando o recurso na database"
             res=VirtualRes(
-                uuid = datetime.now(),
-                description = data['regInfos']['data']['description'],
+                uuid = uuid["data"]["uuid"],
+                description = data["regInfos"]["description"],
+                capabilities = data["regInfos"]["capabilities"],
                 timestamp = datetime.now()
             )
+            #adicionar tratamento capabilities
+            print("[Cataloguer] Registrando VirtualResource na DB")
             print(res)
             res.save()
+            return res
         except:
-            print("Erro no REGISTRO")
+            print("[Cataloguer] Erro no salvamento do Recurso")
+            return -1
+
+
+    def consultCapabilities(self):
+        try:
+            print("[Cataloguer] Consultando Capabilities")
+            capabilities = Capabilities.select()
+            return capabilities
+        except:
+            print("[Cataloguer] Erro no processo de consulta da Capability")
+            return -1
+
+    def saveCapability(self,data):
+        try:
+            #"Registrando o recurso na database"
+            cap=Capabilities(
+                name = data["name"],
+                description = data["description"],
+                association = data["association"]
+            )
+            print("[Cataloguer] Registrando nova Capability na DB")
+            print(cap)
+            cap.save()
+            return cap
+        except:
+            print("[Cataloguer] Erro no salvamento da Capability")
+            return -1
+            

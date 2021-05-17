@@ -1,0 +1,13 @@
+.table{
+    margin: 1rem;
+    border-spacing: 0;
+}
+.table__row:nth-child(even){
+    background-color:azure;
+}
+.table__header{
+    text-align: left;
+}
+.table__cell{
+    padding: 8px;
+}

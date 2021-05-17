@@ -10,11 +10,19 @@ class BaseModel(peewee.Model):
 class VirtualRes(BaseModel):
     uuid=peewee.TextField(unique=True)
     description = peewee.TextField(default=None)
-    timestamp=peewee.DateTimeField(default=datetime.now)
+    capabilities = peewee.TextField(default=None)
+    timestamp=peewee.DateTimeField(default=datetime.now())
+
+class RealSensors(BaseModel):
+    uuid=peewee.TextField(unique=True)
+    description = peewee.TextField(default=None)
+    capabilities = peewee.TextField(default=None)
+    VirtualResource = peewee.ForeignKeyField(VirtualRes)
 
 class Capabilities(BaseModel):
-    virtualResource = peewee.ForeignKeyField(VirtualRes, backref='Capabilities')
-    capabilitie = peewee.CharField(default=None)
+    name = peewee.CharField(default=None)
+    description = peewee.CharField(default=None)
+    association = peewee.CharField(default=None)
 
 
-db.create_tables([VirtualRes, Capabilities])
+db.create_tables([VirtualRes, Capabilities, RealSensors])
