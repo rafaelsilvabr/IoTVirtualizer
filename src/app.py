@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello, World!"
+    return render_template("index.html")
 
 @app.route('/resources', methods =['GET', 'POST', 'DELETE'])
 def receiver():
@@ -43,24 +43,29 @@ def capabilities():
         except:
             return "Erro no processo de envio\n"
 
-'''
-@app.route('/manager', methods=['GET','POST'])
-def manager():
+@app.route('/realsensors', methods=['GET'])
+def realsensors():
     if request.method == 'GET':
-        return "Interface de controle de Operações que podem se r realizadas pelo Manager"
+        headers = ("id", "uuid", "description", "capabilities", "virtualresource")
+        realSensors = cataloguer.consultRealSensors()
+        return render_template("table.html", headings=headers, data=realSensors) 
+
+
+@app.route('/data', methods=['GET', 'POST', 'DELETE'])
+def data():
+    if request.method == 'GET':
+        #Consulta Datas
+        headers = ("id", "sensor", "data", "timestamp")
+        sensorsData = cataloguer.consultData()
+        return render_template("table.html", headings=headers, data=sensorsData) 
     if request.method == 'POST':
-        #requisicao novo (recurso virtual)/(operacao)
-        print("METODO DE REGISTRO DE DADO INICIADO")
         try:
             data = request.get_json()
-            if(data["state"]=="Virtual"):
-                print("DADO VIRTUAL")
-                #registrar novo recurso virtual
-                response = manager.manageRegistResource(data)
+            response = manager.manageDataProcess(data)
+            return jsonify("{}")
         except:
-            response = jsonify({"Data":"Erro no Registro"})
-        return response
-'''
+            return "[RECEIVER] Erro no processo de recebimento da dados do sensor"
+
 if __name__ == "__main__":
     manager = Manager()
     cataloguer = Cataloguer() # so pra testar

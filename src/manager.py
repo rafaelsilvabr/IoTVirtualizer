@@ -14,12 +14,7 @@ class Manager (object):
         return self.sender.sendData(data)
 
     def manageRegistResource(self,data):
-        capabilities = self.cataloguer.consultCapabilities()
-        capabilities = capabilities.__dict__
-        try:
-            #(TO DO)(Está errado, tratar urgentemente)
-            for capability in data["regInfos"]["capabilities"]: #verifica se todas as capabilities estão na db
-                temp = capabilities["__data__"][capability]        
+        try:     
             uuid = self.register.regData(data)
             if(uuid != -1):
                 resource = self.cataloguer.saveResource(data, uuid)
@@ -38,3 +33,10 @@ class Manager (object):
             capability = self.cataloguer.saveCapability(data)
             return capability
         return -1
+
+    def manageDataProcess(self, data):
+        try:
+            response = self.cataloguer.saveData(data)
+            return response
+        except:
+            return "[MANAGER] Erro no processo de recebimento de dados"

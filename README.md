@@ -136,8 +136,10 @@ Exemplo:
 ```json
 {
 	"uuid":"45b7d363-86fd-4f81-8681-663140b318d4",
-	"temperature": 30,
-	"pressure": 1,
-	"light": 213
+	"data":{
+		"temperature": 30,
+		"pressure": 1,
+		"light": 213
+	}
 }
 ```

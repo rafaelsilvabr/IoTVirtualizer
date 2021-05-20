@@ -1,4 +1,4 @@
-from database import VirtualRes, Capabilities
+from database import VirtualRes, Capabilities, ResourceCapability, RealSensors, SensorData
 from datetime import datetime
 
 class Cataloguer(object):
@@ -28,11 +28,51 @@ class Cataloguer(object):
             print("[Cataloguer] Registrando VirtualResource na DB")
             print(res)
             res.save()
+            
+            #Realizou a ligação entre Resource - Capability
+            for capName in data["regInfos"]["capabilities"]:
+                cap = Capabilities.select().where(Capabilities.name == capName)
+                capResource = ResourceCapability(
+                    capability = cap,
+                    virtualresource = res
+                )
+                capResource.save()
+            print("t1")
+            #Realiza a ligação entre resource - realSensor
+            for realsens in data["realSensors"]:
+                try:
+                    senuuid = realsens["uuid"]
+                except:
+                    senuuid = "None"
+                try:
+                    sencapabilities = realsens["capabilities"]
+                except:
+                    sencapabilities = "None"
+                try:
+                    sendescription = realsens["description"]
+                except:
+                    sendescription = "None"
+                print(realsens["capabilities"])
+                sen = RealSensors(
+                    uuid = datetime.now(),
+                    capabilities = sencapabilities,
+                    virtualresource = res,
+                    description = sendescription
+                )
+                sen.save()
+            print("t2")
             return res
         except:
             print("[Cataloguer] Erro no salvamento do Recurso")
             return -1
-
+    def consultRealSensors(self):
+        try:
+            print("[Cataloguer] Consultando realSensors")
+            rSensors = RealSensors.select()
+            return rSensors
+        except:
+            print("[Cataloguer] Erro no processo de consulta dos Sensores Reais")
+            return -1        
 
     def consultCapabilities(self):
         try:
@@ -59,3 +99,29 @@ class Cataloguer(object):
             print("[Cataloguer] Erro no salvamento da Capability")
             return -1
             
+    def consultData(self):
+        try:
+            print("[Cataloguer] Consultando Dados")
+            data = SensorData.select()
+            return data
+        except:
+            print("[Cataloguer] Erro no processo de consulta dos dados")
+            return -1
+
+    def saveData(self,data):
+        try:
+            #"Registrando o recurso na database"
+            print(data)
+            sens = RealSensors.select().where(RealSensors.uuid == data["uuid"])
+            print(sens)
+            sensordata=SensorData(
+                sensor = sens,
+                data = data["data"]
+            )
+            print("[Cataloguer] Registrando nova Dado do Sensor na DB")
+            print(sensordata)
+            sensordata.save()
+            return sensordata
+        except:
+            print("[Cataloguer] Erro no salvamento do Dado")
+            return -1
