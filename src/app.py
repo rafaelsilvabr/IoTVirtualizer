@@ -69,6 +69,7 @@ def data():
 if __name__ == "__main__":
     manager = Manager()
     cataloguer = Cataloguer() # so pra testar
+    # manager.processActivator()
     app.run(debug=True)
 
 
