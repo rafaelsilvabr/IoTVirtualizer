@@ -1,6 +1,6 @@
 # IoTVirtualizer
 
-O objetivo do IoTVirtualizer é realizar o processamento de capabilities complexas para a platagorma InterSCity(INCT) a partir de um conjunto de sensores reais, anteriormente cadastrados na plataforma INCT.
+O objetivo do IoTVirtualizer é realizar o processamento de capabilities complexas para a InterSCity(INCT) a partir de um conjunto de sensores reais, anteriormente cadastrados na plataforma.
 
 ## Componentes IoTVirtualizer
 <img src="Virtualizer.png" width="350">
