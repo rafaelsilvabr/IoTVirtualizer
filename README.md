@@ -56,8 +56,6 @@ Envio Dado
 
 >OBS.: Os próximos passos são realizados de forma independe dos anteriores. São realizados em loop a cada período de tempo.
 
-ProcessActivator
-
 - [MANAGER] Realiza a consulta no banco de dados de todos os dados recebidos de um Recurso Virtual para o processamento de cada capability;
 
 - [MANAGER] Verifica se a restrição de processamento é satisfeita (Exemplo: Minímo de 10 dados reais). Caso a restrição seja satisfeita o processamento do dado é iniciado;
