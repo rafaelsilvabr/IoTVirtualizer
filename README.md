@@ -3,11 +3,8 @@
 O objetivo do IoTVirtualizer é realizar o processamento de capabilities complexas para a platagorma InterSCity(INCT) a partir de um conjunto de sensores reais, anteriormente cadastrados na plataforma INCT.
 
 ## Componentes IoTVirtualizer
-
-<br>
 <img src="Virtualizer.png" width="350">
 <br>
-
 • Receiver: Implementa a camada responsavel por receber os dados e traduzir as
 requisicoes para os metodos internos, pode assumir uma interface REST ou Pub-
 Sub;
@@ -31,9 +28,8 @@ operacooes/capabilities do IoTVirtualizer. Realiza o armazenamento e provê aces
 
 ## Fluxo de Mensagem (Implementação Atual)
 <img src="virtualizer_fluxo.png">
-<br>
 
-### Cadastro Virtual Resource
+Cadastro Virtual Resource
 
 - [RECEIVER] A mensagem é recebida pelo Receiver através de interface REST;
 
@@ -43,7 +39,7 @@ operacooes/capabilities do IoTVirtualizer. Realiza o armazenamento e provê aces
 
 - [Cataloguer] Guarda as informações de cadastro na base de dados local.
 
-### Cadastro Capability
+Cadastro Capability
 
 - [RECEIVER] A mensagem é recebida pelo Receiver através de interface REST;
 
@@ -53,14 +49,14 @@ operacooes/capabilities do IoTVirtualizer. Realiza o armazenamento e provê aces
 
 - [Cataloguer] Guarda as informações de cadastro na base de dados local.
 
-### Envio Dado
+Envio Dado
 - [RECEIVER] A mensagem é recebida pelo Receiver através de interface REST ou Pub-Sub;
 
 - [MANAGER] Guarda o dado do Sensor na base de dados, referenciando o Sensor Real que o dado pertence.
 
 >OBS.: Os próximos passos são realizados de forma independe dos anteriores. São realizados em loop a cada período de tempo.
 
-<span style="color: gray"> ProcessActivator </span>
+ProcessActivator
 
 - [MANAGER] Realiza a consulta no banco de dados de todos os dados recebidos de um Recurso Virtual para o processamento de cada capability;
 
@@ -71,6 +67,16 @@ operacooes/capabilities do IoTVirtualizer. Realiza o armazenamento e provê aces
 - [SENDER] <span style="color: yellow"> Envia o dado processado à INCT. </span>
 
 >OBS.: Sempre que os dados dos sensores são buscados na base de dados para o processamento, o campo "timestamp" do dado é verificado. Dados "velhos" são deletados da base de dados para não puluir o resultado do processamento.
+
+<br>
+
+Modelo da Base de Dados
+
+<img src="relacionamento_basededados.png">
+<br>
+<span style="color:gray"> Imagem gerada automaticamente pelo DBeaver</span>
+<br>
+<br>
 
 ## Data Template: 
 
