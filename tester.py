@@ -8,7 +8,7 @@ headers= {
 msg = {
 	"uuid":"2021-05-19 20:16:06.280355",
 	"data":{
-		"temperature": 30,
+		"temperature": 10,
 		"pressure": 1,
 		"light": 213
 	}

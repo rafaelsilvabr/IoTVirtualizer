@@ -1,5 +1,6 @@
 from database import VirtualRes, Capabilities, ResourceCapability, RealSensors, SensorData
 from datetime import datetime
+import json
 
 class Cataloguer(object):
     def __init__(self):
@@ -111,15 +112,13 @@ class Cataloguer(object):
     def saveData(self,data):
         try:
             #"Registrando o recurso na database"
-            print(data)
             sens = RealSensors.select().where(RealSensors.uuid == data["uuid"])
-            print(sens)
             sensordata=SensorData(
                 sensor = sens,
-                data = data["data"]
+                data = json.dumps(data["data"])
             )
             print("[Cataloguer] Registrando nova Dado do Sensor na DB")
-            print(sensordata)
+            # print(sensordata)
             sensordata.save()
             return sensordata
         except:

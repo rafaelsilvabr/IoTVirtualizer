@@ -66,10 +66,14 @@ def data():
         except:
             return "[RECEIVER] Erro no processo de recebimento da dados do sensor"
 
+import threading
+
 if __name__ == "__main__":
     manager = Manager()
     cataloguer = Cataloguer() # so pra testar
-    # manager.processActivator()
-    app.run(debug=True)
+    w1 = threading.Thread(target = manager.processActivator, args=(10,))
+    w2 = threading.Thread(target = app.run)
 
+    w1.start()
+    w2.start()
 
