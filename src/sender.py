@@ -1,20 +1,29 @@
 import requests
+import json
 
 class Sender(object):
     def __init__(self):
         print("SENDER DECLARADO")
-        pass
-    def sendData(self,data):
+        self.headers = {'Content-type': 'application/json'}
+        self.inctaddr = open('config.json','r')
+        self.inctaddr = json.load(self.inctaddr)
+        self.inctaddr = self.inctaddr['inctaddr']
+    
+    def sendData(self,resourceData, uuid):
         print("SENDER INICIADO")
+        response = 0
         try:
-            #response = requests.post ('http://34.122.206.9:8000/adaptor/resources/' + dbIds.uuid + '/data', data = json.dumps(p_data),headers=headers)
-            #response = "ENVIADO"
-            #print(response.text)
+            print(uuid)
+            print(resourceData)
+            response = requests.post (self.inctaddr + '/adaptor/resources/' + uuid + '/data', data = json.dumps(resourceData),headers=self.headers)
+            response = "ENVIADO"
+            print(response.text)
             #response.text here
-            response = "{}"
-            if(response == "{}"):
-                return(response)
+            #response = "{}"s
+            if(response.text == "{}"):
+                return(response.text)
             else:
                 return('Response Error')
         except:
+            print("[SENDER] Erro no Envio do dado")
             return('Request Error')

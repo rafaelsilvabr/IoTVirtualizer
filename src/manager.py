@@ -21,9 +21,10 @@ class Manager (object):
 
     def manageRegistResource(self,data):
         try:     
-            uuid = self.register.regData(data)
-            if(uuid != -1):
-                resource = self.cataloguer.saveResource(data, uuid)
+            response = self.register.regData(data)
+            response = json.loads(response)
+            if(response != -1):
+                resource = self.cataloguer.saveResource(data, response)
                 return resource
         except:
             return -1
@@ -54,15 +55,14 @@ class Manager (object):
         while(1):
             print("[MANAGER] ProcessActivator Iniciado")
             for rescap in processos:
-                cap = Capabilities.select(Capabilities.association).where(Capabilities.id==rescap.capability).get()
+                cap = Capabilities.select(Capabilities.association, Capabilities.name).where(Capabilities.id==rescap.capability).get()
                 cap = cap.__dict__["__data__"]
-                association = cap['association'].split(":")
+                association = cap["association"].split(":")
                 # print(cap) # jsonCapabilityAssociation
 
                 #rsensors = RealSensors.select().join(VirtualRes).where(VirtualRes == rescap.virtualresource)
                 rsensors = RealSensors.select().join(VirtualRes, on=(RealSensors.virtualresource==rescap.virtualresource))
                 data = SensorData.select(SensorData.data, SensorData.timestamp).where(SensorData.sensor.in_(rsensors))
-
                 dataList = []
                 qtdData = 0
                 for timestamp in data.dicts():
@@ -77,10 +77,13 @@ class Manager (object):
                     qtdData+=1
                     valueData = json.loads(value["data"])
                     dataList.append(valueData[association[1]])
+                
+                uuid = VirtualRes.select(VirtualRes.uuid).where(VirtualRes.id == rescap.virtualresource)
+                for data in uuid.dicts():
+                    uuid = data["uuid"]
                 if(qtdData>=10):
                     print("[MANAGER] Processando Dado")
-                    print(cap['association'])
-                    self.dataProcessor.start(dataList, association)
+                    self.dataProcessor.start(dataList, association, cap["name"], uuid)
             sleep(sleepTime)
             
             
