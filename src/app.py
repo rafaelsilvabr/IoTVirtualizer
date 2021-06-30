@@ -72,8 +72,7 @@ if __name__ == "__main__":
     manager = Manager()
     cataloguer = Cataloguer() # so pra testar
     w1 = threading.Thread(target = manager.processActivator, args=(10,))
-    w2 = threading.Thread(target = app.run)
-
+    
     w1.start()
-    w2.start()
+    app.run(host = "0.0.0.0", port = 8000)
 

@@ -8,7 +8,7 @@ headers= {
 def cadastrarRecursos():
 	msg = {
 		"regInfos":{
-			"description": "Recurso Virtual Região Norte",
+			"description": "Recurso virtual teste",
 			"capabilities": [
 				"averageTemperature",
 				"averagePressure"
@@ -17,10 +17,10 @@ def cadastrarRecursos():
 			"lat":10,
 			"lon":12
 		},
-		"realSensors":[{"uuid":"45b7d363-86fd-4f81-8681-663140b318d4","capabilities":["temperature","pressure"]}]
+		"realSensors":[{"uuid":"709fd3e3-4112-46f4-b148-4778775998e8","capabilities":["temperature","pressure"]}]
 	}
 
-	response = requests.post ('http://localhost:5000/resources', data = json.dumps(msg),headers=headers)
+	response = requests.post ('http://192.168.1.110:8000/resources', data = json.dumps(msg),headers=headers)
 	return response
 
 def cadastrarCapability():

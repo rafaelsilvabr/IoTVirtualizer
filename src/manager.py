@@ -23,6 +23,7 @@ class Manager (object):
         try:     
             response = self.register.regData(data)
             response = json.loads(response)
+            self.register.regIoTGateway(data) #cadastra no iot gateway
             if(response != -1):
                 resource = self.cataloguer.saveResource(data, response)
                 return resource
