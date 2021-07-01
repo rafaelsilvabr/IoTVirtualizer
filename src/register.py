@@ -49,6 +49,4 @@ class Register(object):
             iotGatewayAddr = json.loads(response.__dict__["_content"].decode("utf-8"))
             print(iotGatewayAddr["data"]["description"])
             iotGatewayAddr = json.loads(iotGatewayAddr["data"]["description"])
-            
-            response = requests.post(iotGatewayAddr["gatewayAddr"] + '/virtualizers', data = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-, headers = self.headers)
+            response = requests.post(iotGatewayAddr["gatewayAddr"] + '/virtualizers', data = urllib.request.urlopen('https://ident.me').read().decode('utf8'), headers = self.headers)
