@@ -16,7 +16,7 @@ class Register(object):
     
     def regData(self,regInfos):
         print("[Register] REGISTRANDO RECURSO VIRTUAL NA INCT")
-        
+        print(self.inctaddr)
         resourceData = {
             'data':regInfos['regInfos']
         }

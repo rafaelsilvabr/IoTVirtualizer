@@ -55,7 +55,7 @@ class Cataloguer(object):
                     sendescription = "None"
                 print(realsens["capabilities"])
                 sen = RealSensors(
-                    uuid = datetime.now(),
+                    uuid = senuuid,
                     capabilities = sencapabilities,
                     virtualresource = res,
                     description = sendescription

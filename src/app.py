@@ -3,6 +3,8 @@ from flask.wrappers import Response
 from manager import Manager
 from cataloguer import Cataloguer
 
+import time
+
 
 app = Flask(__name__)
 
@@ -18,10 +20,14 @@ def receiver():
         resources = cataloguer.consultResource()
         return render_template("table.html", headings=headers, data=resources)
     if request.method == 'POST':
+        timeini = time.time()
         # Cadastro novo Virtual Resource
         try:
             data = request.get_json()
             response = manager.manageRegistResource(data)
+            timefim = time.time()
+            print("TEMPO DE EXECUÇÃO")
+            print(timefim-timeini)
             return jsonify(response.__dict__["__data__"])
         except:
             return "[Receiver] Erro no processo de cadastro de um novo Recurso Virtual\n"
@@ -60,8 +66,12 @@ def data():
         return render_template("table.html", headings=headers, data=sensorsData) 
     if request.method == 'POST':
         try:
+            timeini = time.time()
             data = request.get_json()
             response = manager.manageDataProcess(data)
+            timefim = time.time()
+            print("TEMPO DE EXECUÇÃO: ")
+            print(timefim-timeini)
             return jsonify("{}")
         except:
             return "[RECEIVER] Erro no processo de recebimento da dados do sensor"

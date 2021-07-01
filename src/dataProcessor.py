@@ -18,7 +18,6 @@ class DataProcessor:
                     association[1]:response/1
                 }]   
         }}
-
         print(data)
         self.sender.sendData(data,uuid)
 

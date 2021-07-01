@@ -14,7 +14,7 @@ class VirtualRes(BaseModel):
     timestamp=peewee.DateTimeField(default=datetime.now())
 
 class RealSensors(BaseModel):
-    uuid=peewee.TextField(unique=True)
+    uuid=peewee.TextField(default=None)
     description = peewee.TextField(default=None)
     capabilities = peewee.TextField(default=None)
     virtualresource = peewee.ForeignKeyField(VirtualRes)

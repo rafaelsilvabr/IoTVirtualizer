@@ -7,6 +7,8 @@ from dataProcessor import DataProcessor
 from database import VirtualRes, Capabilities, ResourceCapability, RealSensors, SensorData
 import json
 
+import time
+
 class Manager (object):
     def __init__(self):
         print("[MANAGER] MANAGER INICIADO")
@@ -55,6 +57,7 @@ class Manager (object):
         processos = ResourceCapability.select()
         i=0
         while(1):
+            ini = time.time()
             print("[MANAGER] ProcessActivator Iniciado")
             for rescap in processos:
                 cap = Capabilities.select(Capabilities.association, Capabilities.name).where(Capabilities.id==rescap.capability).get()
@@ -83,9 +86,16 @@ class Manager (object):
                 uuid = VirtualRes.select(VirtualRes.uuid).where(VirtualRes.id == rescap.virtualresource)
                 for data in uuid.dicts():
                     uuid = data["uuid"]
-                if(qtdData>=10):
+                print("-------------")
+                print(qtdData)
+                print("dados encontrados")
+                print("-------------")
+                if(qtdData>=1):
                     print("[MANAGER] Processando Dado")
                     self.dataProcessor.start(dataList, association, cap["name"], uuid)
+            fim = time.time()
+            print("TEMPO PROCESSAMENTO PROCESSACTIVATOR")
+            print(fim-ini)
             sleep(sleepTime)
             
             
