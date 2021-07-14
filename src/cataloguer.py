@@ -115,7 +115,8 @@ class Cataloguer(object):
             sens = RealSensors.select().where(RealSensors.uuid == data["uuid"])
             sensordata=SensorData(
                 sensor = sens,
-                data = json.dumps(data["data"])
+                data = json.dumps(data["data"]),
+                timestamp = datetime.now()
             )
             print("[Cataloguer] Registrando nova Dado do Sensor na DB")
             # print(sensordata)

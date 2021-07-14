@@ -7,6 +7,7 @@ from dataProcessor import DataProcessor
 from database import VirtualRes, Capabilities, ResourceCapability, RealSensors, SensorData
 import json
 
+import csv
 import time
 
 class Manager (object):
@@ -57,9 +58,9 @@ class Manager (object):
         processos = ResourceCapability.select()
         i=0
         while(1):
-            ini = time.time()
             print("[MANAGER] ProcessActivator Iniciado")
             for rescap in processos:
+                ini = time.time()
                 cap = Capabilities.select(Capabilities.association, Capabilities.name).where(Capabilities.id==rescap.capability).get()
                 cap = cap.__dict__["__data__"]
                 association = cap["association"].split(":")
@@ -70,12 +71,12 @@ class Manager (object):
                 data = SensorData.select(SensorData.data, SensorData.timestamp).where(SensorData.sensor.in_(rsensors))
                 dataList = []
                 qtdData = 0
-                for timestamp in data.dicts():
-                    diference = datetime.now() - timestamp["timestamp"]
+                for value in data.dicts():
+                    diference = datetime.now() - value["timestamp"]
                 
-                    if(diference > timedelta(minutes = 1)):
-                        print("[MANAGER] Dado deletado da DB: timestamp > 1min")
-                        querry = SensorData.delete().where(SensorData.timestamp == timestamp["timestamp"])
+                    if(diference > timedelta(minutes = 10)):
+                        print("[MANAGER] Dado deletado da DB: timestamp > 10 min")
+                        querry = SensorData.delete().where(SensorData.timestamp == value["timestamp"])
                         querry.execute()
 
                 for value in data.dicts():
@@ -93,9 +94,16 @@ class Manager (object):
                 if(qtdData>=1):
                     print("[MANAGER] Processando Dado")
                     self.dataProcessor.start(dataList, association, cap["name"], uuid)
-            fim = time.time()
-            print("TEMPO PROCESSAMENTO PROCESSACTIVATOR")
-            print(fim-ini)
+                fim = time.time()
+
+                f = open('VIRTUALIZER_time_process_data.csv','a')
+                writer = csv.writer(f)
+                row = [fim-ini , qtdData, association, datetime.now()]
+                writer.writerow(row)
+                f.close()
+
+                print("TEMPO PROCESSAMENTO PROCESSACTIVATOR")
+                print(fim-ini)
             sleep(sleepTime)
             
             

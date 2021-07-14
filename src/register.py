@@ -3,6 +3,8 @@ from flask.wrappers import Response
 import requests
 import json
 import urllib.request
+import csv
+import time
 
 from werkzeug.wrappers import response
 
@@ -20,8 +22,22 @@ class Register(object):
         resourceData = {
             'data':regInfos['regInfos']
         }
+        print(resourceData)
         try:
+            f = open('VIRTUALIZER_direct_time_regist_resource.csv','a')
+            writer = csv.writer(f)
+            timeini = time.time()
+            data_envio = datetime.now()
             response = requests.post (self.inctaddr + '/adaptor/resources/', data = json.dumps(resourceData), headers=self.headers)
+            
+            timefim = time.time()
+            print("TEMPO DE ENVIO DIRETO")
+            print(timefim-timeini)
+            
+            row = [timefim-timeini , data_envio, json.loads(response.text)["data"]["uuid"]]
+            writer.writerow(row)
+            f.close()
+
             print(response.text)
             return response.text
         except:
